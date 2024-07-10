@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.uploadFile {
+  :global(.ant-upload-select) {
+    padding: 0 !important;
+  }
+}
+
+.feedContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.postCard {
+  margin-bottom: 16px;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+/* PostModal.css */
+.decoded-html p {
+  margin-bottom: 1em;
+  line-height: 1.5;
+}
+
+.decoded-html h1, .decoded-html h2, .decoded-html h3, .decoded-html h4, .decoded-html h5, .decoded-html h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.decoded-html img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em 0;
+}
+
+.decoded-html a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.decoded-html ul, .decoded-html ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}

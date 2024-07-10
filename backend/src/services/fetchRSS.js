@@ -8,14 +8,12 @@ const fetchRSS = async () => {
         const rssData = response.data;
 
         const parser = new xml2js.Parser();
-        parser.parseString(rssData, async (err, result) => {
-            if (err) {
-                console.error('Error parsing XML:', err);
-                return;
-            }
+        const result = await parser.parseStringPromise(rssData);
 
-            const items = result.rss.channel[0].item;
-            const promises = items.map(async (item) => {
+        const items = result.rss.channel[0].item;
+
+        const promises = items.map(async (item) => {
+            try {
                 const link = item.guid[0]['_'];
                 const existingPost = await Post.findOne({ link });
 
@@ -26,16 +24,21 @@ const fetchRSS = async () => {
                         pubDate: new Date(item.pubDate[0]),
                         description: item.description[0],
                         thumbnail: item['media:thumbnail'] ? item['media:thumbnail'][0]['$'].url : '',
-                        content: item['content:encoded'] ? item['content:encoded'][0] : ''
+                        content: item['content:encoded'] ? item['content:encoded'][0] : '',
+                        source: item.link[0],
+                        creator: item['dc:creator'] ? item['dc:creator'][0] : ''
                     });
 
-                    return post.save();
+                    await post.save();
+                    console.log(`Saved post: ${post.title}`);
                 }
-            });
-
-            await Promise.all(promises);
-            console.log('RSS feed fetched and stored successfully');
+            } catch (err) {
+                console.error('Error processing item:', err);
+            }
         });
+
+        await Promise.all(promises);
+        console.log('RSS feed fetched and stored successfully');
     } catch (err) {
         console.error('Error fetching RSS feed:', err);
     }

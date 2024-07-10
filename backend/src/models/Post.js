@@ -7,6 +7,8 @@ const PostSchema = new mongoose.Schema({
     description: String,
     thumbnail: String,
     content: String,
+    source: String,
+    creator: String
 }, { timestamps: true });
 
 module.exports = mongoose.model('Post', PostSchema);
