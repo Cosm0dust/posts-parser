@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_URI=mongodb+srv://abab:nybtvrcexwzq@next.mqmozf7.mongodb.net/parcer?retryWrites=true&w=majority
+      - PORT=3000
+    ports:
+      - "3000:3000"

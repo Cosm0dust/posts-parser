@@ -1,0 +1,18 @@
+{
+  "name": "rss-parser",
+  "version": "1.0.0",
+  "description": "RSS parser that fetches RSS feeds on a schedule and stores new posts in a MongoDB database.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/worker.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^5.10.9",
+    "node-cron": "^2.0.3",
+    "xml2js": "^0.4.23"
+  }
+}
